@@ -1,16 +1,57 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* *:focus {
+  outline: 2px black dashed;
+} */
+
+.w-override {
+  transform:translateX(-50%);
+  margin-left:50%;
+  @apply w-screen;
+}
+.skipnav:not(:focus) {
+  @apply sr-only;
+}
+.skipnav:focus {
+  @apply absolute px-4 py-2;
+  top: 1rem;
+  left: 1rem;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+/* .focus\:custom {
+  outline: 2px dotted transparent;
+  outline-offset: 2px;
+} */
 
-* {
-  box-sizing: border-box;
+
+@layer base {
+
+  *:focus:not([tabindex='-1']), button:focus {
+    outline:4px #f96700 solid;
+    outline-offset:4px;
+  }
+  *:focus[tabindex='-1'] {
+    outline:none !important;
+  }
+
+  /* *:focus, button:focus {
+    outline: transparent;
+    @apply ring-blue-300 ring-4
+  }
+  *:focus:not(:focus-visible) {
+    outline: none;
+    @apply ring-transparent ring-0;
+  }
+  *:focus-visible {
+    outline: transparent;
+    @apply ring-blue-300 ring-4;
+  }
+  *[tabindex=-1]:focus {
+    outline: 0 !important;
+    @apply ring-transparent ring-0;
+
+  } */
 }

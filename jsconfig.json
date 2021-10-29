@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module":"umd",
+    "moduleResolution": "node",
+    "jsx": "react"
+  },
+  "exclude": ["node_modules"]
+}
