@@ -13,7 +13,7 @@ export default function Index(){
   return (
     <Layout>
       <header className="bg-black text-white">
-        <a href="#maincontent" className="skipnav bg-blue-600 rounded text-white">Skip to content</a>
+        <a href="#maincontent" className="global-skipnav bg-blue-600 rounded text-white">Skip to content</a>
       <div className="max-w-screen-md w-full flex-wrap justify-between flex flex-col sm:flex-row mx-auto items-center p-4">
         {/* <Image src="/img/yeahburger-logo.svg" width="156" height="40" role="img" alt="Yeah Burger" /> */}
         <AccessibleSvg alt="Yeah Burger"><Logo/></AccessibleSvg>

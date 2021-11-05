@@ -1,118 +1,132 @@
-import { Formik, Form } from 'formik';
-// import { TextInput, SubmitButton, Hidden, Checkbox } from 'ui/components/Form'
+import { Formik, Form, useFormikContext } from 'formik';
+import { useEffect, useRef } from 'react';
 
 import * as yup from "yup"
-import { useState }  from 'react';
-// import { checkFetchResponseStatus } from "helpers/apiHelpers"
-// import StorefrontCheckout from "helpers/shopifyStorefront"
+import Layout from 'ui/layout/Layout';
 
-// import { ESSENTIAL_AUDIT_PRICE } from 'helpers/constants'
+import TextField from "ui/form/TextField"
+import Radio from 'ui/form/Radio';
+import Fieldset from 'ui/form/Fieldset';
+import Select from 'ui/form/Select';
+import SubmitButton from 'ui/form/SubmitButton';
+import Checkbox from 'ui/form/Checkbox';
+import useForm from 'ui/form/useForm';
+import FormErrors from 'ui/form/FormErrors';
+
+import { announce } from 'ui/form/LiveAnnouncer';
 
 const initialValues = {
-  website_url: '',
-  first_name: '',
-  last_name: '',
-  email_address: '',
-  phone_number: '',
-  agree_terms_and_conditions: false,
-  product_sku: 'essential-website-audit'
+  burger_type: '',
+  toppings: [],
+  side: '',
+  drink: '',
+  quantity: 1,
 }
 
 const validationSchema = yup.object({
-  website_url: yup.string().trim().lowercase().required("Your website url is required"),
-  first_name: yup.string().trim().required("Your first name is required"),
-  last_name: yup.string().trim().required("Your last name is required"),
-  email_address: yup.string().trim().lowercase().email('Invalid email address').required('Your email address is required'),
-  phone_number: yup.string().trim(),
-  agree_terms_and_conditions: yup.boolean().oneOf([true], 'Please read and agree to the terms and conditions'),
-  product_sku: yup.string().required(''),
+  burger_type: yup.string().required('Please select a burger type'),
+  side: yup.string().required('Please choose a side'),
+  toppings: yup.array().ensure().compact(),
+  drink: yup.string().required('Please choose a drink'),
 }).noUnknown();
 
-function useCheckout(){
-  const [state, setState] = useState({
-    isSuccess: false,
-    isLoading: false,
-    isError: false
-  })
+export default function OrderForm(){
 
-  function updateState(newState){
-    setState(prevState => ({
-      ...prevState, ...newState
-    }))
+  const { status, onSubmit } = useForm()
+
+  const doSubmit = () => {
+    // This will not run if validation fails
+
+    onSubmit(async () => {
+      // Form submission to api
+
+      return new Promise( (resolve, reject) => setTimeout(() => {
+
+        // Announce success
+        announce('Your items have been added to your order')
+        return resolve()
+      } , 1000) )
+    })
   }
 
-  async function onSubmit (values) {
-    updateState({ isLoading: true })
 
-    const redirect_url = await StorefrontCheckout().create_checkout_and_get_redirect_url(values)
+  return (<Layout>
+    <div className="max-w-[640px] mx-auto py-16">
+      <h1 className="text-3xl font-bold mb-8">Single combo</h1>
+      <Formik initialValues={ initialValues } validationSchema={ validationSchema } onSubmit={ doSubmit } validateOnBlur>
+        { (props) => (
+          <Form noValidate="" method="POST" action="#" acceptCharset="UTF-8" className="space-y-8">
 
-    window.location.href = redirect_url;
-    updateState({ isLoading: false })
-    return;
 
-  }
+          <FormErrors />
 
-  return { initialValues, fetchStatus: state, onSubmit }
-}
+          <Fieldset type="radio" name="burger_type"label="Type of patty" instructions="Choose your burger type of burger patty">
+            <Radio label="Beef" value="beef" />
+            <Radio label="Plant" value="plant" />
+          </Fieldset>
 
-import Field from "ui/form/Field"
-import TextField from "ui/form/TextField"
-export default function Form1(){
-  const {
-    fetchStatus,
-    onSubmit
-  } = useCheckout()
+          <Fieldset type="checkbox" name="toppings" label="Burger toppings" instructions="Choose the toppings you’d like on your burger">
+            <Checkbox label="Lettuce" value="lettuce" />
+            <Checkbox label="Tomato" value="tomato" />
+            <Checkbox label="Onion" value="onion" />
+            <Checkbox label="Pickle" value="pickle" />
+            <Checkbox label="Ketchup" value="ketchup" />
+            <Checkbox label="Mayo" value="mayo" />
+          </Fieldset>
 
-  return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      <Form noValidate="" method="POST" action="#" acceptCharset="UTF-8" className="umami--submit--checkout">
+          <Fieldset type="radio" name="drink" label="Drink" instructions="Choose 1 drink">
+            <Radio label="Coke" value="coke" />
+            <Radio label="Diet Coke" value="diet_coke" />
+            <Radio label="Cream soda" value="cream_soda" />
+            <Radio label="Dr Pepper" value="dr_pepper" />
+            <Radio label="Apple Juice" value="apple_juice" />
+            <Radio label="Mango Juice" value="mango_juice" />
+            <Radio label="Water" value="water" />
+          </Fieldset>
 
-      <TextField name="first_name" label="Text"/>
+          <Fieldset type="radio" name="side" label="Side" instructions="Choose 1 side">
+            <Radio label="Fries" value="fries"/>
+            <Radio label="Onion rings" value="onion_rings"/>
+            <Radio label="Poutine" value="poutine" />
+            <Radio label="Salad" value="salad" />
+          </Fieldset>
 
-      <fieldset>
-        <legend className="flex flex-col">
-          Type of burger patty
-        </legend>
-        <div>
-          <input type="radio" id="beef" value="beef" name="type" />
-          <label htmlFor="beef">Beef</label>
-        </div>
-        <div>
-          <input type="radio" id="plant" value="plant" name="type" />
-          <label htmlFor="plant">Plant</label>
-        </div>
-      </fieldset>
+          <TextField name="special_requests" label="Special requests"/>
 
-      <fieldset>
-        <legend className="flex flex-col">
-          Choose your drink
-        </legend>
-        <div>
-          <input type="radio" id="beef" value="beef" name="type" />
-          <label htmlFor="beef">Coke</label>
-        </div>
-        <div>
-          <input type="radio" id="plant" value="plant" name="type" />
-          <label htmlFor="plant">Diet Coke</label>
-        </div>
-      </fieldset>
-      </Form>
-    </Formik>
+          <Select name="quantity" label="Quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </Select>
+
+          <SubmitButton loadingLabel="Adding to order" isLoading={ status.isLoading } label="Add to order" />
+
+        </Form>
+      )}
+      </Formik>
+    </div>
+  </Layout>
   )
 }
 
 
 /**
 
-Aria-live
-Error messaging
-Keyboard access
+ Aria-live
+ Error messaging
+ Keyboard access
 
-How do we associate error messages to a fieldset
+ How do we associate error messages to a Radioset
 
 
 References:
-Accessible errors for fieldsets: https://blog.tenon.io/accessible-validation-of-checkbox-and-radiobutton-groups/ (append error message inthe the legend)
+Accessible errors for Radiosets: https://blog.tenon.io/accessible-validation-of-checkbox-and-radiobutton-groups/ (append error message inthe the legend)
 
 
  *
