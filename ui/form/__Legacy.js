@@ -3,13 +3,13 @@
 import React from 'react';
 import clsx from 'clsx'
 import { useField, useFormikContext } from 'formik';
-//      <FieldError {...meta} {...props} key={`uuid-${props.name}`} />
+//      <ErrorField {...meta} {...props} key={`uuid-${props.name}`} />
 
 const AccessibleBroadcast = ({ mode = "polite" }) => (
   <span aria-live={ mode }>{ children }</span>
 )
 
-// const FieldError = ({ touched, error, ...props }) => (
+// const ErrorField = ({ touched, error, ...props }) => (
 //   <span
 //     className={ clsx('text-red-500', props.className) }
 //     // aria-live="polite"
@@ -50,7 +50,7 @@ export const TextInput = ({ label, ...props }) => {
         aria-describedby={`error-${props.name}`} // Should become {aria-errormessage} when better supported
         aria-invalid={!!meta.touched && !!meta.error}
         />
-      <FieldError {...meta} {...props} className="mt-1" />
+      <ErrorField {...meta} {...props} className="mt-1" />
     </div>
   );
 };
@@ -81,7 +81,7 @@ export const TextArea = ({ label, ...props }) => {
     <div className="flex flex-col py-4">
       <label htmlFor={props.id || props.name} className="text-lg mb-1">{label}</label>
       <textarea className={clsx(classnames.base, classnames.focus)} {...field} {...props} />
-      <FieldError {...meta} />
+      <ErrorField {...meta} />
     </div>
   );
 };
@@ -95,7 +95,7 @@ export const Checkbox = ({ children, ...props }) => {
           className="appearance-none border-gray-300 w-[1.25rem] h-[1.25rem] border rounded-md checked:bg-black checked:border-transparent mr-2 flex-shrink-0 custom:bg-image-checkmark" />
         <span>{children}</span>
       </label>
-      <FieldError {...meta} />
+      <ErrorField {...meta} />
     </div>
   );
 };
@@ -106,7 +106,7 @@ export const Select = ({ label, ...props }) => {
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>
       <select {...field} {...props} />
-      <FieldError {...meta}/>
+      <ErrorField {...meta}/>
     </div>
   );
 };

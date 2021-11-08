@@ -1,8 +1,10 @@
 import { Formik, Form, useFormikContext } from 'formik';
 import { useEffect, useRef } from 'react';
-
 import * as yup from "yup"
+import Image from 'next/image';
+
 import Layout from 'ui/layout/Layout';
+import Header from "ui/templates/Header"
 
 import TextField from "ui/form/TextField"
 import Radio from 'ui/form/Radio';
@@ -11,7 +13,7 @@ import Select from 'ui/form/Select';
 import SubmitButton from 'ui/form/SubmitButton';
 import Checkbox from 'ui/form/Checkbox';
 import useForm from 'ui/form/useForm';
-import FormErrors from 'ui/form/FormErrors';
+import ErrorSummary from 'ui/form/ErrorSummary';
 
 import { announce } from 'ui/form/LiveAnnouncer';
 
@@ -51,16 +53,26 @@ export default function OrderForm(){
 
 
   return (<Layout>
-    <div className="max-w-[640px] mx-auto py-16">
-      <h1 className="text-3xl font-bold mb-8">Single combo</h1>
+
+  <Header/>
+  <main id="maincontent" tabIndex="-1" className="">
+    <div className="w-full max-w-[48rem] mx-auto py-16 grid grid-cols-1 sm:grid-cols-5 gap-12">
+      <div className="col-span-2">
+        <Image src="/img/beef-burger@3x.png" layout="responsive" width="320" height="314" alt="" className="max-w-full rounded-xl" />
+      </div>
+      <div className="col-span-3">
+      <h1 className="text-3xl font-bold mb-8 flex items-center">
+          <Image src="/img/single-burger@3x.png" width="32" height="32" alt="" />
+        <span className="ml-3">Single combo</span>
+
+        </h1>
       <Formik initialValues={ initialValues } validationSchema={ validationSchema } onSubmit={ doSubmit } validateOnBlur>
         { (props) => (
-          <Form noValidate="" method="POST" action="#" acceptCharset="UTF-8" className="space-y-8">
+          <Form noValidate={ true }method="POST" action="#" acceptCharset="UTF-8" className="space-y-8">
 
+          <ErrorSummary />
 
-          <FormErrors />
-
-          <Fieldset type="radio" name="burger_type"label="Type of patty" instructions="Choose your burger type of burger patty">
+          <Fieldset type="radio" name="burger_type" label="Type of patty" instructions="Choose your burger type of burger patty">
             <Radio label="Beef" value="beef" />
             <Radio label="Plant" value="plant" />
           </Fieldset>
@@ -110,7 +122,9 @@ export default function OrderForm(){
         </Form>
       )}
       </Formik>
+      </div>
     </div>
+    </main>
   </Layout>
   )
 }

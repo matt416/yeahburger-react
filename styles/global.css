@@ -50,55 +50,56 @@
   }
 
 
-  /** Radio */
+  /** Radio -> input[type=radio] */
 
-  input[type=radio].global-radio {
+  .global-radio {
     @apply appearance-none bg-white w-[1.25rem] h-[1.25rem] border border-gray-400 rounded-full shadow-sm bg-gradient-to-b from-white to-gray-100;
   }
 
-  input[type=radio].global-radio:checked {
+  .global-radio:checked {
     @apply bg-center bg-no-repeat border-2 border-black;
     background-image:url('/icon/radio-checked.svg');
     background-size: 12px 12px;
   }
 
-  input[type=radio].global-radio:focus {
+  .global-radio:focus {
     @apply ring-2 ring-orange-500 ring-offset-2;
     outline: transparent;
   }
 
 
-  /** Checkbox */
+  /** Checkbox -> input[type=checkbox] */
 
-  input[type=checkbox].global-checkbox {
+  .global-checkbox {
     @apply appearance-none bg-white w-[1.25rem] h-[1.25rem] border border-gray-400 rounded-[6px] shadow-sm bg-gradient-to-b from-white to-gray-100;
   }
 
-  input[type=checkbox].global-checkbox:checked {
+  .global-checkbox:checked {
     @apply bg-center bg-no-repeat bg-black border-black;
     background-image:url('/icon/checkbox-checked.svg');
     background-size: 12px 12px;
   }
 
-  input[type=checkbox].global-checkbox:focus {
+  .global-checkbox:focus {
     @apply ring-2 ring-orange-500 ring-offset-2;
     outline: transparent;
   }
 
-  select.global-select {
+  /** Select -> select */
+  .global-select {
     @apply appearance-none bg-no-repeat bg-white border border-gray-400 rounded-[6px] px-3 py-2 shadow-sm bg-gradient-to-b from-white to-gray-100;
     background-image:url('/icon/select-arrow.svg');
     background-position: calc(100% - 16px) 50%;
     background-size: 12px 12px;
   }
 
-  select.global-select:focus {
+  .global-select:focus {
     @apply ring-1 ring-offset-0 ring-orange-500 border-orange-500 bg-orange-50;
     outline: transparent;
   }
 
 
-  /** Textfield */
+  /** Textfield -> input[type=text] */
 
   .global-textfield:focus {
     @apply ring-1 ring-offset-0 ring-orange-500 border-orange-500 bg-orange-50;
