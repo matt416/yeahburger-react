@@ -2,7 +2,7 @@ import { Formik, Form, useFormikContext } from 'formik';
 import { useEffect, useRef } from 'react';
 import * as yup from "yup"
 import Image from 'next/image';
-
+import Head from 'next/head'
 import Layout from 'ui/layout/Layout';
 import Header from "ui/templates/Header"
 
@@ -54,7 +54,7 @@ export default function OrderForm(){
 
 
   return (<Layout>
-
+  <Head><title>YeahBurger</title></Head>
   <Header/>
   <main id="maincontent" tabIndex="-1" className="">
     <div className="w-full max-w-[48rem] mx-auto py-16 grid grid-cols-1 sm:grid-cols-5 gap-12">
