@@ -26,11 +26,12 @@ const initialValues = {
 }
 
 const validationSchema = yup.object({
-  burger_type: yup.string().required('Please select a burger type'),
-  side: yup.string().required('Please choose a side'),
+  burger_type: yup.string().required('Please choose your burger patty'),
   toppings: yup.array().ensure().compact(),
-  drink: yup.string().required('Please choose a drink'),
+  side: yup.string().required('Please choose your side'),
+  drink: yup.string().required('Please choose your drink'),
 }).noUnknown();
+
 
 export default function OrderForm(){
 
@@ -66,18 +67,18 @@ export default function OrderForm(){
         <span className="ml-3">Single combo</span>
 
         </h1>
-      <Formik initialValues={ initialValues } validationSchema={ validationSchema } onSubmit={ doSubmit } validateOnBlur>
+      <Formik initialValues={ initialValues } validationSchema={ validationSchema } onSubmit={ doSubmit }>
         { (props) => (
-          <Form noValidate={ true }method="POST" action="#" acceptCharset="UTF-8" className="space-y-8">
+          <Form noValidate={ true } method="POST" action="#" acceptCharset="UTF-8" className="space-y-8">
 
           <ErrorSummary />
 
-          <Fieldset type="radio" name="burger_type" label="Type of patty" instructions="Choose your burger type of burger patty">
+          <Fieldset type="radio" name="burger_type" label="Type of patty" instructions="Choose your burger patty" required>
             <Radio label="Beef" value="beef" />
             <Radio label="Plant" value="plant" />
           </Fieldset>
 
-          <Fieldset type="checkbox" name="toppings" label="Burger toppings" instructions="Choose the toppings you’d like on your burger">
+          <Fieldset type="checkbox" name="toppings" label="Burger toppings" instructions="Choose your toppings">
             <Checkbox label="Lettuce" value="lettuce" />
             <Checkbox label="Tomato" value="tomato" />
             <Checkbox label="Onion" value="onion" />
@@ -86,7 +87,7 @@ export default function OrderForm(){
             <Checkbox label="Mayo" value="mayo" />
           </Fieldset>
 
-          <Fieldset type="radio" name="drink" label="Drink" instructions="Choose 1 drink">
+          <Fieldset type="radio" name="drink" label="Drink" instructions="Choose your drink" required>
             <Radio label="Coke" value="coke" />
             <Radio label="Diet Coke" value="diet_coke" />
             <Radio label="Cream soda" value="cream_soda" />
@@ -96,7 +97,7 @@ export default function OrderForm(){
             <Radio label="Water" value="water" />
           </Fieldset>
 
-          <Fieldset type="radio" name="side" label="Side" instructions="Choose 1 side">
+          <Fieldset type="radio" name="side" label="Side" instructions="Choose your side" required>
             <Radio label="Fries" value="fries"/>
             <Radio label="Onion rings" value="onion_rings"/>
             <Radio label="Poutine" value="poutine" />

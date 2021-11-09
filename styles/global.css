@@ -19,6 +19,11 @@
   @apply w-screen;
 } */
 
+/** Scroll margin */
+fieldset, label {
+  scroll-margin-top:1.5rem;
+}
+
 
 /** Skip navigation */
 

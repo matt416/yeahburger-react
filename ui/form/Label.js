@@ -1,3 +1,5 @@
-export default function Label({ children, className, ...props }) {
-  return <label htmlFor={ props.id || props.name } {...props} className={ className }>{ children }</label>
+import Required from "./Required";
+
+export default function Label({ htmlFor = undefined, required = false, children, className }) {
+  return <label htmlFor={ htmlFor } className={ className }>{ children } <Required required={ required }/></label>
 }

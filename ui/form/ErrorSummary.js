@@ -31,6 +31,7 @@ export default function ErrorSummary() {
 
   }, [isValid, submitCount, errors, count])
 
+  const errorCount = Object.keys(errors).length
 
   return !isValid && submitCount > 0
     ? <div tabIndex="-1" ref={ ref } style={{ scrollMarginTop: '2rem' }} role="alert" className="bg-red-500 text-white p-4 rounded-xl">
@@ -38,7 +39,7 @@ export default function ErrorSummary() {
 
       <h2 className="flex items-center font-bold text-md mb-2">
         <AccessibleSvg alt={ false } className="mr-2"><ErrorIcon className="text-white "/></AccessibleSvg>
-        There are errors
+        { errorCount > 1 ? `There are ${errorCount} errors` : 'There is 1 error' }
       </h2>
       <ol>
         { Object.keys(errors).map(key => <li key={ `error-${key}` }><a href={`#${key}`} className="underline">{ errors[key] }</a></li>) }

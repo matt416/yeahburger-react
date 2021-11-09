@@ -4,6 +4,16 @@ let liveArea = React.createRef();
 // Simplified version of react-aria LiveAnnouncer
 // https://www.npmjs.com/package/@react-aria/live-announcer
 
+/** To use,
+
+  //Trigger to aria-live container to announce error
+  useEffect(() => {
+    if (touched && error) {
+      announce(error, "assertive")
+    }
+  }, [touched, error])
+*/
+
 export const announce = (message, mode) => {
   liveArea.current.announce(message, mode)
 }

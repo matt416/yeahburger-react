@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "svg": "svgo -f ./public/img -o ./public/img --config=svgo.yaml --pretty --indent=2"
+    "svg": "svgo -f ./public/icon -o ./public/icon --config=svgo.yaml --pretty --indent=2"
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.3.0",

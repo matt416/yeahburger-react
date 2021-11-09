@@ -1,24 +1,25 @@
 import Field from "./Field"
-import { useField } from 'formik';
-import camelcase from "camelcase";
+import camelcase from "camelcase"
+import Label from "./Label"
+import useField from "./useField"
 
-export default function TextField({ label, ...props }) {
-  const [field, meta] = useField(props);
+export default function TextField({ label, name, value, required, ...props }) {
 
-return <Field { ...{ label, meta, ...props }}>
+  const { field, error } = useField({ name, value });
 
+return <Field label={ label } error={ error } name={ name }>
+    <Label htmlFor={ name } className="mb-2" required={ required }>{ label }</Label>
     <input
       className="border border-gray-300 rounded-md px-3 py-2 global-textfield"
       {...field}
       {...props}
-      id={props.name}
-      required={ props.required }
+      id={ name }
+      required={ required }
       autoComplete={ props.autoComplete }
       // aria-required={props.required}
       /* Handle errors */
-      aria-describedby={camelcase(`error-${props.name}`)} // Should become {aria-errormessage} when better supported
-      aria-invalid={!!meta.touched && !!meta.error}
+      aria-describedby={ camelcase(`error-${name}`) } // Should become {aria-errormessage} when better supported
+      aria-invalid={ error.visible }
     />
-
   </Field>
 }

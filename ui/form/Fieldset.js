@@ -1,39 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ErrorField from "./ErrorField"
-import { useField, useFormikContext } from "formik"
+import useField  from "./useField"
 import clsx from "clsx"
-import { useId } from "@react-aria/utils";
+import Required from "./Required";
+import Valid from "./Valid";
 
-function AccessibleLegendError({showError, error}){
-  return showError ? <span className="sr-only">{ error }</span> : null
+function AccessibleLegendError({ error }){
+  return error.visible ? <span className="sr-only">{ error.message }</span> : null
 }
 
-export default function Fieldset({ label, name, instructions, children, className, type = "checkbox" }){
+export default function Fieldset({ label, name, value, instructions, required = false, children, className, type = "checkbox" }){
 
-  const [field, meta] = useField({ name, type });
-  const { submitCount } = useFormikContext()
+  const { field, error, valid } = useField({ name, value, type });
 
   const totalItems = React.Children.count(children)
 
   const newChildren = React.Children.map(children, (child, index) => React.cloneElement(child, { ...child.props, index: index+1, totalItems, name } ))
 
-  const showError = !!meta.error && submitCount > 0
-  const errorClassList = showError ? "border-red-500" : null
+  const errorClassList = error.visible ? "border-red-500" : null
 
   return (
     <fieldset
-      aria-invalid={showError}
+      aria-invalid={ error.visible }
       id={ name }
       className={ clsx("flex flex-col", className) }
       >
-      <legend className="font-bold text-lg">
-        { label }
-        <AccessibleLegendError showError={ showError } error={ meta.error } />
+      <legend className="font-bold text-lg flex items-center">
+        { label } <Required required={ required } className="ml-2" />
+        <AccessibleLegendError error={ error } />
       </legend>
 
-      { showError
-        ? <ErrorField showError={ showError } error={ meta.error } name={ name } srHidden={ true } className="mt-1" />
-        : instructions ? <p className="text-gray-700">{ instructions }</p> : null
+      { error.visible
+        ? <ErrorField error={ error } name={ name } srHidden={ true } className="mt-1" />
+        : instructions ? <p className="text-gray-700 inline-flex items-center"><Valid show={ valid }/> { instructions }</p> : null
       }
 
       <div className={`border border-gray-200 rounded-xl flex flex-col overflow-hidden mt-2 ${errorClassList}`}>

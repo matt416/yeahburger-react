@@ -1,22 +1,24 @@
 import Field from "./Field"
-import { useField } from 'formik';
+import useField from './useField';
 import camelcase from "camelcase";
+import Label from "./Label";
 
-export default function Select({ label, children, ...props }) {
-  const [field, meta] = useField(props);
+export default function Select({ label, children, required, name, value, ...props }) {
+  const { field, meta, error } = useField({ name, value });
 
-return <Field { ...{ label, meta, ...props }}>
+return <Field label={ label} error={ error } name={ name }>
+    <Label htmlFor={ name } required={ required } className="mb-2">{ label }</Label>
 
     <select
       className="global-select"
       {...field}
       {...props}
-      id={props.name}
-      required={ props.required }
+      id={name}
+      required={ required }
       // autoComplete={ props.autoComplete }
-      // aria-required={props.required}
+      // aria-required={required}
       /* Handle errors */
-      aria-describedby={camelcase(`error-${props.name}`)} // Should become {aria-errormessage} when better supported
+      aria-describedby={camelcase(`error-${name}`)} // Should become {aria-errormessage} when better supported
       aria-invalid={!!meta.touched && !!meta.error}
     >
       { children }
