@@ -14,6 +14,7 @@ import SubmitButton from 'ui/form/SubmitButton';
 import Checkbox from 'ui/form/Checkbox';
 import useForm from 'ui/form/useForm';
 import ErrorSummary from 'ui/form/ErrorSummary';
+import SuccessSummary from 'ui/form/SuccessSummary';
 
 import { announce } from 'ui/form/LiveAnnouncer';
 
@@ -28,8 +29,8 @@ const initialValues = {
 const validationSchema = yup.object({
   burger_type: yup.string().required('Please choose your burger patty'),
   toppings: yup.array().ensure().compact(),
-  side: yup.string().required('Please choose your side'),
   drink: yup.string().required('Please choose your drink'),
+  side: yup.string().required('Please choose your side'),
 }).noUnknown();
 
 
@@ -46,7 +47,7 @@ export default function OrderForm(){
       return new Promise( (resolve, reject) => setTimeout(() => {
 
         // Announce success
-        announce('Your items have been added to your order')
+        // announce('Your items have been added to your order')
         return resolve()
       } , 1000) )
     })
@@ -58,28 +59,37 @@ export default function OrderForm(){
   <Header/>
   <main id="maincontent" tabIndex="-1" className="">
     <div className="w-full max-w-[48rem] mx-auto py-16 grid grid-cols-1 sm:grid-cols-5 gap-12">
-      <div className="col-span-2">
+      <div className="col-span-5 md:col-span-2">
         <Image src="/img/beef-burger@3x.png" layout="responsive" width="320" height="314" alt="" className="max-w-full rounded-xl" />
       </div>
-      <div className="col-span-3">
-      <h1 className="text-3xl font-bold mb-8 flex items-center">
-          <Image src="/img/single-burger@3x.png" width="32" height="32" alt="" />
-        <span className="ml-3">Single combo</span>
 
+      <div className="col-span-5 md:col-span-3">
+
+        <div className="mb-12">
+        <h1 className="text-3xl font-bold mb-4 flex items-center">
+          <Image src="/img/single-burger@3x.png" width="32" height="32" alt="" />
+          <span className="ml-3">Single combo</span>
+
+          <span className="ml-auto mr-0 text-2xl">$11</span>
         </h1>
+        <p>Our single combo includes your choice of beef or plant burger patty, with your choice of toppings, plus a drink and a side.</p>
+      </div>
+
       <Formik initialValues={ initialValues } validationSchema={ validationSchema } onSubmit={ doSubmit }>
         { (props) => (
           <Form noValidate={ true } method="POST" action="#" acceptCharset="UTF-8" className="space-y-8">
 
           <ErrorSummary />
 
-          <Fieldset type="radio" name="burger_type" label="Type of patty" instructions="Choose your burger patty" required>
-            <Radio label="Beef" value="beef" />
+          <SuccessSummary isSuccess={ status.isSuccess }/>
+
+          <Fieldset type="radio" name="burger_type" label="Type of patty" instructions="Choose a beef or vegan plant burger patty" required>
+            <Radio label="Beef" value="beef" aria-describedby="burger_type-instructions" id="burger_type" />
             <Radio label="Plant" value="plant" />
           </Fieldset>
 
-          <Fieldset type="checkbox" name="toppings" label="Burger toppings" instructions="Choose your toppings">
-            <Checkbox label="Lettuce" value="lettuce" />
+          <Fieldset type="checkbox" name="toppings" label="Burger toppings" instructions="Choose from our 7 delicious toppings">
+            <Checkbox label="Lettuce" value="lettuce" aria-describedby="toppings-instructions" />
             <Checkbox label="Tomato" value="tomato" />
             <Checkbox label="Onion" value="onion" />
             <Checkbox label="Pickle" value="pickle" />
@@ -87,7 +97,7 @@ export default function OrderForm(){
             <Checkbox label="Mayo" value="mayo" />
           </Fieldset>
 
-          <Fieldset type="radio" name="drink" label="Drink" instructions="Choose your drink" required>
+          <Fieldset type="radio" name="drink" label="Drink" instructions="Select 1 drink" required>
             <Radio label="Coke" value="coke" />
             <Radio label="Diet Coke" value="diet_coke" />
             <Radio label="Cream soda" value="cream_soda" />
@@ -97,14 +107,14 @@ export default function OrderForm(){
             <Radio label="Water" value="water" />
           </Fieldset>
 
-          <Fieldset type="radio" name="side" label="Side" instructions="Choose your side" required>
+          <Fieldset type="radio" name="side" label="Side" instructions="Select 1 side" required>
             <Radio label="Fries" value="fries"/>
             <Radio label="Onion rings" value="onion_rings"/>
             <Radio label="Poutine" value="poutine" />
             <Radio label="Salad" value="salad" />
           </Fieldset>
 
-          <TextField name="special_requests" label="Special requests"/>
+          <TextField name="special_requests" label="Special requests" instructions="Please let us know about any allergies, or preferred cooking directions" />
 
           <Select name="quantity" label="Quantity">
             <option value="1">1</option>

@@ -11,32 +11,39 @@ function AccessibleLegendError({ error }){
 
 export default function Fieldset({ label, name, value, instructions, required = false, children, className, type = "checkbox" }){
 
-  const { field, error, valid } = useField({ name, value, type });
+  const { error } = useField({ name, value, type });
 
-  const totalItems = React.Children.count(children)
+  // const totalItems = React.Children.count(children)
 
-  const newChildren = React.Children.map(children, (child, index) => React.cloneElement(child, { ...child.props, index: index+1, totalItems, name } ))
+  const newChildren = React.Children.map(children, (child, index) => {
+    const id = index === 0 ? name : null // Give the first child element a focusable id
+
+    return React.cloneElement(child, { ...child.props, id, name } )
+
+  })
 
   const errorClassList = error.visible ? "border-red-500" : null
 
   return (
     <fieldset
       aria-invalid={ error.visible }
-      id={ name }
+      id={ `${name}-fieldset` }
       className={ clsx("flex flex-col", className) }
       >
-      <legend className="font-bold text-lg flex items-center">
+      <legend className="font-bold text-lg w-full">
+        <div className="inline-flex w-full items-center">
         { label }
+        {/* <Required required={ required } srOnly={ true } /> */}
+        <Required required={ required } className="ml-auto mr-0" />
         <AccessibleLegendError error={ error } />
-        <Required required={ required } srOnly={ true } />
+        </div>
       </legend>
 
       <div className="text-gray-700 inline-flex items-center w-full justify-between">
       { error.visible
         ? <ErrorField error={ error } name={ name } srHidden={ true } />
-        : instructions ? <p className="inline-flex items-center"><Valid show={ valid }/> { instructions }</p> : null
+        : instructions ? <p className="inline-flex items-center" id={ `${name}-instructions` }> { instructions }</p> : null
       }
-      <Required required={ required } className="ml-2" aria-hidden="true" />
       </div>
 
       <div className={`border border-gray-200 rounded-xl flex flex-col overflow-hidden mt-2 ${errorClassList}`}>
@@ -46,3 +53,4 @@ export default function Fieldset({ label, name, value, instructions, required = 
     </fieldset>
   )
 }
+//<Valid show={ valid }/>

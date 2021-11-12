@@ -2,7 +2,7 @@ import Label from "./Label";
 import useField from "./useField"
 import { useId } from "@react-aria/utils";
 
-export default function Radio({ label, name, value }){
+export default function Radio({ label, name, value, ...props }){
 
   const { field, error } = useField({ name, value, type: 'radio' });
   const id = useId()
@@ -16,6 +16,8 @@ export default function Radio({ label, name, value }){
       className={ `global-radio ${ error.visible ? "border-red-500" : null }` }
       id={ id }
       {...field}
+      {...props}
+
     />
     <span>{ label }</span>
   </label>

@@ -1,8 +1,7 @@
-import Label from "./Label";
 import useField from "./useField"
 import { useId } from "@react-aria/utils";
 
-export default function Checkbox({ label, name, value }){
+export default function Checkbox({ label, name, value, ...props }){
 
   const { field, error } = useField({ name, value, type: 'checkbox' });
 
@@ -17,6 +16,7 @@ export default function Checkbox({ label, name, value }){
       className={ `global-checkbox mr-2 ${error.visible ? "border-red-500" : null }` }
       id={ id }
       {...field}
+      {...props}
     />
     { label }
   </label>

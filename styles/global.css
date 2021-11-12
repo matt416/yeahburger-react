@@ -3,12 +3,13 @@
 @tailwind utilities;
 @layer base {
 
+
   /** Focus reset */
 
-  *:focus:not([tabindex='-1']), button:focus {
+  /* *:focus:not([tabindex='-1']), button:focus {
     @apply ring-2 ring-offset-2 ring-orange-500;
     outline:transparent;
-  }
+  } */
   *:focus[tabindex='-1'] {
     outline:transparent !important;
   }
@@ -20,7 +21,7 @@
 } */
 
 /** Scroll margin */
-fieldset, label {
+fieldset, label, input {
   scroll-margin-top:1.5rem;
 }
 
@@ -92,6 +93,8 @@ fieldset, label {
   .global-checkbox:focus {
     @apply ring-2 ring-orange-500 ring-offset-2;
     outline: transparent;
+    outline: black !important;
+    outline-offset: 4px;
   }
 
   /** Select -> select */
@@ -114,5 +117,6 @@ fieldset, label {
     @apply ring-1 ring-offset-0 ring-orange-500 border-orange-500 bg-orange-50;
     outline: transparent;
   }
+
 
 }
