@@ -9,11 +9,11 @@ export default function TextField({ label, name, value, instructions, required, 
   const { field, error } = useField({ name, value });
 
 return <Field label={ label } error={ error } name={ name }>
-    <Label htmlFor={ name }  required={ required }>{ label }</Label>
+    <Label htmlFor={ name } required={ required }>{ label }</Label>
     <div className="text-gray-700 inline-flex items-center w-full justify-between mb-2">
       { error.visible
         ? <ErrorField error={ error } name={ name } srHidden={ true } />
-        : instructions ? <p className="inline-flex items-center"> { instructions }</p> : null
+        : instructions ? <p className="inline-flex items-center" id={ `${name}-instructions` }> { instructions }</p> : null
       }
       </div>
     <input
@@ -21,11 +21,11 @@ return <Field label={ label } error={ error } name={ name }>
       {...field}
       {...props}
       id={ name }
-      required={ required }
+      // required={ required }
       autoComplete={ props.autoComplete }
       // aria-required={props.required}
       /* Handle errors */
-      aria-describedby={ camelcase(`error-${name}`) } // Should become {aria-errormessage} when better supported
+      aria-describedby={ error.visible ? camelcase(`error-${name}`) : `${name}-instructions` } // Should become {aria-errormessage} when better supported
       aria-invalid={ error.visible }
     />
   </Field>

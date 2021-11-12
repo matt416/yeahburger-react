@@ -93,7 +93,7 @@ export default function OrderForm(){
           <SuccessSummary isSuccess={ status.isSuccess }/>
 
           <Fieldset type="radio" name="burger_type" label="Type of patty" instructions="Choose a beef or vegan plant burger patty" required>
-            <Radio label="Beef" value="beef" aria-describedby="burger_type-instructions" id="burger_type" />
+            <Radio label="Beef" value="beef" aria-describedby="burger_type-instructions" />
             <Radio label="Plant" value="plant" />
           </Fieldset>
 
@@ -107,7 +107,7 @@ export default function OrderForm(){
           </Fieldset>
 
           <Fieldset type="radio" name="drink" label="Drink" instructions="Select 1 drink" required>
-            <Radio label="Coke" value="coke" />
+            <Radio label="Coke" value="coke" aria-describedby="drink-instructions" />
             <Radio label="Diet Coke" value="diet_coke" />
             <Radio label="Cream soda" value="cream_soda" />
             <Radio label="Dr Pepper" value="dr_pepper" />
@@ -117,13 +117,17 @@ export default function OrderForm(){
           </Fieldset>
 
           <Fieldset type="radio" name="side" label="Side" instructions="Select 1 side" required>
-            <Radio label="Fries" value="fries"/>
+            <Radio label="Fries" value="fries" aria-describedby="side-instructions"/>
             <Radio label="Onion rings" value="onion_rings"/>
             <Radio label="Poutine" value="poutine" />
             <Radio label="Salad" value="salad" />
           </Fieldset>
 
-          <TextField name="special_requests" label="Special requests" instructions="Please let us know about any allergies, or preferred cooking directions" />
+          <TextField
+            name="special_requests"
+            label="Special requests"
+            instructions="Please let us know about any allergies, or preferred cooking directions"
+          />
 
           <Select name="quantity" label="Quantity">
             <option value="1">1</option>

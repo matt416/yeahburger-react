@@ -41,7 +41,7 @@ export default function Fieldset({ label, name, value, instructions, required = 
 
       <div className="text-gray-700 inline-flex items-center w-full justify-between">
       { error.visible
-        ? <ErrorField error={ error } name={ name } srHidden={ true } />
+        ? <ErrorField error={ error } name={ name }  />
         : instructions ? <p className="inline-flex items-center" id={ `${name}-instructions` }> { instructions }</p> : null
       }
       </div>
