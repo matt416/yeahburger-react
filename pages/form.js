@@ -57,22 +57,31 @@ export default function OrderForm(){
   return (<Layout>
   <Head><title>YeahBurger</title></Head>
   <Header/>
-  <main id="maincontent" tabIndex="-1" className="">
+  <main id="maincontent" tabIndex="-1" className="px-4">
     <div className="w-full max-w-[48rem] mx-auto py-16 grid grid-cols-1 sm:grid-cols-5 gap-12">
-      <div className="col-span-5 md:col-span-2">
-        <Image src="/img/beef-burger@3x.png" layout="responsive" width="320" height="314" alt="" className="max-w-full rounded-xl" />
+      <div className="hidden md:block md:col-span-2">
+        <Image src="/img/beef-burger@3x.png" layout="responsive" width="320" height="314" alt="Our mouth watering burger complete with fries and a drink" className="max-w-full rounded-xl" />
       </div>
 
       <div className="col-span-5 md:col-span-3">
 
         <div className="mb-12">
-        <h1 className="text-3xl font-bold mb-4 flex items-center">
-          <Image src="/img/single-burger@3x.png" width="32" height="32" alt="" />
-          <span className="ml-3">Single combo</span>
 
-          <span className="ml-auto mr-0 text-2xl">$11</span>
-        </h1>
-        <p>Our single combo includes your choice of beef or plant burger patty, with your choice of toppings, plus a drink and a side.</p>
+          <h1 className="text-3xl font-bold mb-4 flex items-center">
+            <Image src="/img/single-burger@3x.png" width="32" height="32" alt="" aria-hidden="true" />
+            <span className="ml-3">Single combo</span>
+
+            <span className="ml-auto mr-0 text-2xl">$11</span>
+          </h1>
+          <div className="flex">
+          <p>Our single combo includes your choice of beef or plant burger patty, with your choice of toppings, plus a drink and a side.</p>
+
+          <div className="block md:hidden ml-4">
+            <Image src="/img/beef-burger@3x.png" width="192" height="192" alt="Our mouth watering burger complete with fries and a drink" className="rounded-xl" />
+          </div>
+          </div>
+
+
       </div>
 
       <Formik initialValues={ initialValues } validationSchema={ validationSchema } onSubmit={ doSubmit }>
