@@ -55,7 +55,7 @@ export default function OrderForm(){
 
 
   return (<Layout>
-  <Head><title>YeahBurger</title></Head>
+  <Head><title>Single Burger Combo - Yeah Burger</title></Head>
   <Header/>
   <main id="maincontent" tabIndex="-1" className="px-4">
     <div className="w-full max-w-[48rem] mx-auto py-16 grid grid-cols-1 sm:grid-cols-5 gap-12">

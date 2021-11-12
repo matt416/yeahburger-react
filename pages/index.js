@@ -2,7 +2,7 @@ import Image from "next/image"
 import Layout from "ui/layout/Layout"
 import Header from "ui/templates/Header"
 import Link from "next/link"
-
+import Head from "next/head"
 // const MainMenu = [
 //   { label: "Menu", href: "#menu" },
 //   { label: "Combos", href: "#combos" },
@@ -13,6 +13,7 @@ export default function Index(){
 
   return (
     <Layout>
+      <Head><title>Yeah Burger</title></Head>
       <Header/>
     <main className="w-full mx-auto" tabIndex="-1" id="maincontent">
       <section
