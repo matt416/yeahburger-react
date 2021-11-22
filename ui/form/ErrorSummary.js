@@ -31,7 +31,7 @@ export default function ErrorSummary() {
     ? <div tabIndex="-1" ref={ ref } style={{ scrollMarginTop: '2rem' }} role="alert" className="bg-red-600 text-white p-4 rounded-xl" aria-relevant="additions">
 
       <h2 className="flex items-center font-bold text-md mb-2">
-        <AccessibleSvg alt={ false } className="mr-2"><ErrorIcon className="text-white "/></AccessibleSvg>
+        <AccessibleSvg alt="Error message" aria-hidden="true" className="mr-2"><ErrorIcon className="text-white "/></AccessibleSvg>
         { errorCount > 1 ? `There are ${errorCount} errors` : 'There is 1 error' }
       </h2>
       <ol>

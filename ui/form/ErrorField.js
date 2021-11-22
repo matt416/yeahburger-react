@@ -10,14 +10,16 @@ export default function ErrorField({ name, error, srHidden, className }) {
     the error message in the legend area.
   */
 
-  return <a href={ `#${name}`}
-    className={ `text-red-600 flex items-center ${className}` }
-    id={ camelcase(`error-${name}`) }
-    aria-hidden={ srHidden }
-  >
+  return <>
     { error.visible && error.message
+    ? <a href={ `#${name}`}
+        className={ `text-red-600 flex items-center ${className}` }
+        id={ camelcase(`error-${name}`) }
+        aria-hidden={ srHidden }
+      >
       ? <><AccessibleSvg alt="Error" className="mr-2"><ErrorIcon className="text-red-600 "/></AccessibleSvg>{ error.message }</>
-      : null
+    </a>
+    : null
     }
-  </a>
+  </>
 }

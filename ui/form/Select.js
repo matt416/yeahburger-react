@@ -18,7 +18,7 @@ return <Field label={ label} error={ error } name={ name }>
       // autoComplete={ props.autoComplete }
       // aria-required={required}
       /* Handle errors */
-      aria-describedby={camelcase(`error-${name}`)} // Should become {aria-errormessage} when better supported
+      aria-describedby={ error.visible && error.message ? camelcase(`error-${name}`) : undefined } // Should become {aria-errormessage} when better supported
       aria-invalid={!!meta.touched && !!meta.error}
     >
       { children }
