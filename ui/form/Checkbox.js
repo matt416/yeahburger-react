@@ -7,7 +7,7 @@ export default function Checkbox({ label, name, value, ...props }){
 
   const id = useId()
 
-  return <label className={
+  return <label htmlFor={ id } className={
     `inline-flex items-center space-x-2 min-h-[3rem] px-4 py-2 focus-within:bg-orange-50
     ${ field.checked ? "bg-gray-50 global-checked" : "bg-gray-100 global-unchecked" }`
   }>

@@ -7,9 +7,7 @@ export default function ErrorSummary() {
 
   const { isValid, errors, submitCount } = useFormikContext()
   const ref = useRef()
-  // const originalTitle = document?.title || null
 
-  // const [errorList, setErrorList] = useState([])
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -18,12 +16,8 @@ export default function ErrorSummary() {
 
       if (submitCount !== count) {
         // Submit was attempted and there are errors
-
         ref.current.focus()
-        // document?.title = "Error: " + originalTitle
 
-      } else {
-        // document?.title = originalTitle
       }
       setCount(submitCount)
 
@@ -34,8 +28,7 @@ export default function ErrorSummary() {
   const errorCount = Object.keys(errors).length
 
   return !isValid && submitCount > 0
-    ? <div tabIndex="-1" ref={ ref } style={{ scrollMarginTop: '2rem' }} role="alert" className="bg-red-500 text-white p-4 rounded-xl">
-      <Head><title></title></Head>
+    ? <div tabIndex="-1" ref={ ref } style={{ scrollMarginTop: '2rem' }} role="alert" className="bg-red-600 text-white p-4 rounded-xl" aria-relevant="additions">
 
       <h2 className="flex items-center font-bold text-md mb-2">
         <AccessibleSvg alt={ false } className="mr-2"><ErrorIcon className="text-white "/></AccessibleSvg>

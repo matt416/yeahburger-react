@@ -11,12 +11,12 @@ export default function ErrorField({ name, error, srHidden, className }) {
   */
 
   return <a href={ `#${name}`}
-    className={ `text-red-500 flex items-center ${className}` }
+    className={ `text-red-600 flex items-center ${className}` }
     id={ camelcase(`error-${name}`) }
     aria-hidden={ srHidden }
   >
-    { error.visible
-      ? <><AccessibleSvg alt="Error" className="mr-2"><ErrorIcon className="text-red-500 "/></AccessibleSvg>{ error.message }</>
+    { error.visible && error.message
+      ? <><AccessibleSvg alt="Error" className="mr-2"><ErrorIcon className="text-red-600 "/></AccessibleSvg>{ error.message }</>
       : null
     }
   </a>
