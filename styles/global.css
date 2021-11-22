@@ -63,7 +63,6 @@ fieldset, label, input {
   /** Radio -> input[type=radio] */
 
   .global-radio {
-    @apply bg-gray-100;
     @apply appearance-none bg-white w-[1.25rem] h-[1.25rem] border border-gray-400 rounded-full shadow-sm bg-gradient-to-b from-white to-gray-100;
   }
 
@@ -82,7 +81,6 @@ fieldset, label, input {
   /** Checkbox -> input[type=checkbox] */
 
   .global-checkbox {
-    @apply bg-gray-100;
     @apply appearance-none bg-white w-[1.25rem] h-[1.25rem] border border-gray-400 rounded-[6px] shadow-sm bg-gradient-to-b from-white to-gray-100;
   }
 
@@ -101,7 +99,6 @@ fieldset, label, input {
 
   /** Select -> select */
   .global-select {
-    @apply bg-gray-100;
     @apply appearance-none bg-no-repeat bg-white border border-gray-400 rounded-[6px] px-3 py-2 shadow-sm bg-gradient-to-b from-white to-gray-100;
     background-image:url('/icon/select-arrow.svg');
     background-position: calc(100% - 16px) 50%;

@@ -17,7 +17,7 @@ export default function ErrorField({ name, error, srHidden, className }) {
         id={ camelcase(`error-${name}`) }
         aria-hidden={ srHidden }
       >
-      ? <><AccessibleSvg alt="Error" className="mr-2"><ErrorIcon className="text-red-600 "/></AccessibleSvg>{ error.message }</>
+      <><AccessibleSvg alt="Error" className="mr-2"><ErrorIcon className="text-red-600 "/></AccessibleSvg>{ error.message }</>
     </a>
     : null
     }
